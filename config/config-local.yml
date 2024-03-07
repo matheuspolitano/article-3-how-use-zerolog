@@ -1,0 +1,12 @@
+server:
+  AppVersion: 1.0.0
+  Port: :5000
+  Mode: Development
+  Debug: false
+  
+logger:
+  Development: true
+  DisableCaller: false
+  DisableStacktrace: false
+  Encoding: json
+  Level: info
