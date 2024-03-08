@@ -5,8 +5,6 @@ server:
   Debug: false
   
 logger:
-  Development: true
-  DisableCaller: false
-  DisableStacktrace: false
-  Encoding: json
-  Level: info
+  Development: false
+  Level: debug
+  Format: default

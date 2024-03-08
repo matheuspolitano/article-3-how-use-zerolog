@@ -31,10 +31,9 @@ type ServerConfig struct {
 }
 
 type LoggerConfig struct {
-	Development        bool
-	DisableCaller      bool
-	DisableStackTRACER bool
-	Level              string
+	Development bool
+	Level       string
+	Format      string
 }
 
 func LoadConfig(filename string) (*viper.Viper, error) {
@@ -66,7 +65,7 @@ func GetConfigPath(env string) (string, error) {
 		if value, ok := ENV_PATH_TYPES_AVAILABLES[env]; ok {
 			return value, nil
 		} else {
-			return "", errors.New(fmt.Sprintf("The env is not available, these are available %v", utils.GetKeys(ENV_PATH_TYPES_AVAILABLES)))
+			return "", fmt.Errorf("The env is not available, these are available %v", utils.GetKeys(ENV_PATH_TYPES_AVAILABLES))
 		}
 	}
 
