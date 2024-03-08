@@ -1,6 +1,7 @@
 package config
 
 import (
+	"article-3-how-use-zerolog/pkg/utils"
 	"errors"
 	"fmt"
 	"os"
@@ -65,8 +66,24 @@ func GetConfigPath(env string) (string, error) {
 		if value, ok := ENV_PATH_TYPES_AVAILABLES[env]; ok {
 			return value, nil
 		} else {
-			return nil, errors.New(fmt.Sprintf())
+			return "", errors.New(fmt.Sprintf("The env is not available, these are available %v", utils.GetKeys(ENV_PATH_TYPES_AVAILABLES)))
 		}
 	}
 
+}
+
+func LoadDefaultConfig() (*Config, error) {
+	filepath, err := GetConfigPath(os.Getenv("enviroment"))
+	if err != nil {
+		return nil, err
+	}
+	vcfg, err := LoadConfig(filepath)
+	if err != nil {
+		return nil, err
+	}
+	cfg, err := ParseConfig(vcfg)
+	if err != nil {
+		return nil, err
+	}
+	return cfg, nil
 }
